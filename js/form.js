@@ -15,21 +15,20 @@ document.addEventListener("DOMContentLoaded", function() {
         const jsonString = JSON.stringify(formData, null, 2);
         document.getElementById("jsonOutput").textContent = jsonString;
 
-        const xhr = new XMLHttpRequest();
-        const url = '/somewhere-url?' + new URLSearchParams(formData).toString();
-
-        xhr.open("GET", url, true);
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    alert("Данные успешно отправлены и получен ответ: " + xhr.responseText);
-                } else {
-                    alert("Произошла ошибка при отправке данных.");
+        const url = '/url-address?' + new URLSearchParams(formData).toString();
+		
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
-            }
-        };
-
-        xhr.send();
+                return response.text();
+            })
+            .then(data => {
+                alert("Данные успешно отправлены");
+            })
+            .catch(error => {
+                alert("Произошла ошибка при отправке данных: " + error.message);
+            });
     });
 });
