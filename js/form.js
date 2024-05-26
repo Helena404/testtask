@@ -14,7 +14,7 @@ const jsonOutput = JSON.stringify(formObject, null, 2);
 document.getElementById('jsonOutput').textContent = jsonOutput;
 
 		
-        fetch(url)
+        fetch("/url")
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
