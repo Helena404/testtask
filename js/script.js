@@ -1,29 +1,21 @@
-document.addEventListener("DOMContentLoaded", function() {
     alert("Привет, мир");
 
-    let isHeaderVisible = true;
-    let isSwapped = false;
-
     document.querySelector(".btn-warning").addEventListener("click", function() {
-        const block1 = document.querySelector(".block-1");
-        if (isHeaderVisible) {
-            block1.style.display = "none";
-        } else {
-            block1.style.display = "block";
-        }
-        isHeaderVisible = !isHeaderVisible;
+		const block1 = document.querySelector(".row-1");
+		block1.classList.toggle('hidden');
     });
 
-    document.querySelector(".btn-success").addEventListener("click", function() {
+
+	//через css св-во order
+    document.getElementById('swapButton').addEventListener("click", function() {
         const block2 = document.querySelector(".block-2");
         const block3 = document.querySelector(".block-3");
-        const parent = block2.parentNode;
 
-        if (isSwapped) {
-            parent.insertBefore(block2, block3);
-        } else {
-            parent.insertBefore(block3, block2);
-        }
-        isSwapped = !isSwapped;
+		if (block2.classList.contains('order-1') && block3.classList.contains('order-2')) {
+			block2.classList.replace('order-1', 'order-2');
+			block3.classList.replace('order-2', 'order-1');
+		} else {
+			block2.classList.replace('order-2', 'order-1');
+			block3.classList.replace('order-1', 'order-2');
+		}
     });
-});
